@@ -29,3 +29,13 @@ gem 'mysql2', '~> 0.2.6'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem 'carrierwave'
+gem 'rmagick'
+gem 'jquery-rails'
+gem 'passenger'
+
+group :development do
+  gem 'pry-rails'
+  gem 'yaml_db'
+end
