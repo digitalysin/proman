@@ -34,6 +34,7 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'jquery-rails'
 gem 'passenger'
+gem 'haml-rails'
 
 group :development do
   gem 'pry-rails'
