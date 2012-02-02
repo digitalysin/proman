@@ -1,0 +1,33 @@
+.container_title Project
+.container_body
+  %h3 Create new project
+  - if @project.errors.present?
+    .field_with_errors_box
+      %h3
+        = pluralize(@project.errors.count,"error")
+        prohibited this project from being saved
+      %ul 
+        - @project.errors.full_messages.each do |message|
+          %li= message
+  = form_for @project do |f|
+    %table
+      %tr
+        %td= f.label :name
+        %td
+        %td= f.text_field :name
+      %tr
+        %td= f.label :description
+        %td
+        %td= f.text_area :description, :rows => 7
+      %tr
+        %td= f.label :due_at
+        %td
+        %td= f.datetime_select :due_at
+      %tr
+        %td= f.label :assigned_to
+        %td
+        %td= f.collection_select :user_ids, User.all, :id, :full_name, {}, {:name => "project[user_ids][]"}
+      %tr
+        %td
+        %td
+        %td= f.submit

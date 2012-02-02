@@ -8,7 +8,6 @@
         %a{:href => "#"} Logout
 #menu.menu
   %ul
-    %li
-      %a{:href => "#"} Dashboard
-    %li
-      %a{:href => "#"} Projects
+    %li= link_to "Dashboard", root_path
+    %li= link_to "Project", projects_path
+      

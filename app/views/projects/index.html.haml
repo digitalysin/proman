@@ -1,0 +1,7 @@
+.container_title Projects
+.container_body
+  - unless @projects.present?
+    %h3 
+      You dont have any project yet or You can 
+      = link_to "create", new_project_path
+      new one

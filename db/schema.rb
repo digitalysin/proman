@@ -10,7 +10,54 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201024232) do
+ActiveRecord::Schema.define(:version => 20120202062251) do
+
+  create_table "activities", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "milestones", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "due_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  create_table "milestones_users", :id => false, :force => true do |t|
+    t.integer "milestone_id"
+    t.integer "user_id"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "due_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "due_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "milestone_id"
+  end
+
+  create_table "tasks_users", :id => false, :force => true do |t|
+    t.integer "task_id"
+    t.integer "user_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
