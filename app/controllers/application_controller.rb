@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :before_filter_callback
+  helper_method :class_link_to
   
   private
     def after_sign_up_path
@@ -13,9 +14,15 @@ class ApplicationController < ActionController::Base
     
     def before_filter_callback
       authenticate_member!    
-      @current_active_user = User.find current_member.id if current_member.present?  
-      @today_activity = Activity.today
-      @yesterday_activity = Activity.yesterday
-      @all_projects = Project.all
+      if current_member.present?  
+        @current_active_user = User.find current_member.id 
+        @today_activity = Activity.today
+        @yesterday_activity = Activity.yesterday
+        @all_projects = Project.all
+      end
+    end
+    
+    def class_link_to(title,path)
+      self.class.helpers.link_to title, path
     end
 end

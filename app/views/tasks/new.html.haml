@@ -1,0 +1,37 @@
+.container_title new task
+.container_body
+  %h3 
+    Create new task for 
+    = link_to @milestone.name.humanize, project_milestone_path(@project, @milestone)
+    milestone
+  - if @task.errors.present?
+    .field_with_errors_box
+      %h3
+        = pluralize(@task.errors.count, "error")
+        prohibited this model from being saved
+      %ul
+        - @task.errors.full_messages.each do |message|
+          %li= message
+  = form_for @task, :url => project_milestone_tasks_path(@project,@milestone,@task) do |f|
+    %table
+      %tr
+        %td= f.label :name
+        %td
+        %td= f.text_field :name
+      %tr
+        %td= f.label :description
+        %td
+        %td= f.text_area :description, :rows => 7, :cols => 50
+      %tr
+        %td= f.label :due_at
+        %td
+        %td= f.datetime_select :due_at
+      %tr
+        %td Assigned to
+        %td
+        %td= f.collection_select :user_ids, User.all, :id, :full_name, {}, {:name => "task[user_ids][]"}
+      %tr
+        %td
+        %td
+        %td= f.submit
+        

@@ -1,0 +1,44 @@
+.container_title Project Detail
+.container_body
+  %h1= @project.name.humanize
+  .project_status
+    Status 
+    - if @project.closed?
+      %span.project_closed Closed
+    - else
+      %span.project_open Open
+    |
+    Due at
+    = @project.due_at.strftime("%d, %B %Y")
+    |
+    assigned to
+    = @project.users.collect {|user| link_to user.full_name, user_path(user) }.join(',').html_safe
+  
+  .project_description= @project.description
+  
+  - unless @project.milestones.present?
+    .milestone
+      there is no milestone yet, you can 
+      = link_to 'create', new_project_milestone_path(@project)
+      new milestone
+  - else
+    %h3.milestone Available milestone for this project
+    %ul
+      - @project.milestones.each do |milestone|
+        %li
+          = link_to milestone.name.humanize, project_milestone_path(@project, milestone)
+          .project_status
+            Status
+            - if milestone.closed?
+              %span.project_closed Closed
+            - else
+              %span.project_open Open
+            |
+            Due at
+            = milestone.due_at.strftime("%d, %B %Y")
+            |
+            assigned to
+            = milestone.users.collect{|user| link_to user.full_name, user_path(user) }.join(',').html_safe
+    .milestone
+      = link_to 'Append', new_project_milestone_path(@project)
+      new milestone

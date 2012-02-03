@@ -1,0 +1,38 @@
+.container_title 
+  Create New Milestone
+.container_body
+  %h3
+    Create new milestone for
+    = link_to @project.name.humanize, project_path(@project)
+    project
+  - if @milestone.errors.present?
+    .field_with_errors_box
+      %h3
+        = pluralize(@milestone.errors.count, "error")
+        prohibited this model from being saved
+      %ul
+        - @milestone.errors.full_messages.each do |message|
+          %li= message
+          
+  = form_for @milestone, :url => project_milestones_path(@project) do |f|
+    %table
+      %tr
+        %td= f.label :name
+        %td
+        %td= f.text_field :name
+      %tr
+        %td= f.label :description
+        %td
+        %td= f.text_area :description, :rows => 10, :cols => 50
+      %tr
+        %td= f.label :due_at
+        %td
+        %td= f.datetime_select :due_at
+      %tr
+        %td Assigned to
+        %td
+        %td= f.collection_select :user_ids, User.all, :id, :full_name, {}, {:name => "milestone[user_ids][]"}
+      %tr
+        %td
+        %td
+        %td= f.submit

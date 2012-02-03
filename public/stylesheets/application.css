@@ -201,6 +201,16 @@ h1 {
 	text-decoration:underline;
 }
 
+/* container_body */
+.project_status {
+	font-size:10px;margin:3px;
+}
+.project_open { color : #528D00;}
+.project_closed { color :#FCBABA;}
+.project_description {font-size:13px; margin:15px 3px;}
+h3.milestone {text-decoration:underline;padding-top:10px;display:block;margin:3px;}
+div.milestone { margin:5px 3px;}
+
 /* container_left */
 .container_left {
 	margin:20px;

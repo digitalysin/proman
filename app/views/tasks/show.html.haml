@@ -1,0 +1,17 @@
+.container_title task detail
+.container_body
+  %h1= @task.name.humanize
+  .project_status
+    Status
+    - if @task.closed?
+      %span.project_closed Closed
+    - else
+      %span.project_open Open
+    |
+    Due at
+    = @task.due_at.strftime("%d, %B %Y")
+    |
+    assigned to
+    = @task.users.collect{|user| link_to user.full_name, user_path(user) }.join(',').html_safe
+    
+  .project_description= @task.description

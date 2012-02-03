@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    
+    @project = Project.find params[:id]
   end
   
   def new
@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     @project = Project.new params[:project]
     respond_to do |format|
       if @project.save 
-        Activity.append "#{self.class.helpers.link_to current_member.full_name, user_path(current_member)} created new #{@project.name} project and assigned to #{@project.users.collect{ |u| self.class.helpers.link_to u.full_name, user_path(u) }.join(',')}"
+        Activity.append "#{class_link_to current_member.full_name, user_path(current_member)} created new '#{class_link_to @project.name, project_path(@project)}' project and assigned to #{@project.users.collect{ |u| class_link_to u.full_name, user_path(u) }.join(',')}"
         format.html { redirect_to projects_path, :notice => "Project successfully created." }
       else
         format.html { render :action => :new }
