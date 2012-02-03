@@ -1,4 +1,5 @@
 Proman::Application.routes.draw do
+  devise_for :members
   root :to => "home#index"
   resources :projects, :users
   # The priority is based upon order of creation:

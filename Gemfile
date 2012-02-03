@@ -35,6 +35,7 @@ gem 'rmagick'
 gem 'jquery-rails'
 gem 'passenger'
 gem 'haml-rails'
+gem 'devise'
 
 group :development do
   gem 'pry-rails'
