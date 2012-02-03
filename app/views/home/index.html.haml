@@ -1,53 +1,33 @@
 .container_title Dashboard
 .container_body
-  %h1 Your Projects
-  %ul
-    %li 
-      %a{:href => "#"} Building Innovative Software
-      %div 
-        Due at : 22, January 2012 and assigned to 
-        %a{:href => "#"} john pettruci        
-    %li 
-      %a{:href => "#"} Agile Web Development using Ruby on Rails
-      %div 
-        Due at : 22, January 2012 and assigned to 
-        %a{:href => "#"} john pettruci
-    %li 
-      %a{:href => "#"} Please don't be skeptic
-      %div 
-        Due at : 22, January 2012 and assigned to 
-        %a{:href => "#"} john pettruci
-
+  - if @all_projects.present?
+    %h1 Your Projects
+    %ul
+      - @all_projects.each do |project|
+        %li 
+          = link_to project.name, project_path(project)
+          %div 
+            = "Due at #{project.due_at.strftime('%d, %B %Y')} and assigned to"
+            = project.users.collect{ |user| link_to user.full_name, user_path(user) }.join(',').html_safe
+          
   %h1 Recent Activity
-  %ul
-    %li
-      %h3 Today
-      .recent_activity
-        %ul
-          - 5.times do
-            %li
-              %div
-                %a{:href => "#"} john petrucci
-                commented on 
-                %a{:href => "#"} Building Innovative Software
-    %li
-      %h3 Yesterday
-      .recent_activity
-        %ul
-          - 5.times do
-            %li
-              %div
-                %a{:href => "#"} john petrucci
-                commented on 
-                %a{:href => "#"} Agile Web Development using Ruby on Rails
-    %li
-      %h3 Few days ago
-      .recent_activity
-        %ul
-          - 5.times do
-            %li
-              %div
-                %a{:href => "#"} john petrucci
-                commented on 
-                %a{:href => "#"} Please don't be skeptic
+  - if @today_activity.present?
+    %ul
+      %li
+        %h3 Today
+        .recent_activity
+          %ul
+            - @today_activity.each do |activity|
+              %li
+                %div= activity.content.html_safe
+                
+  - if @yesterday_activity.present?
+    %ul
+      %li
+        %h3 Today
+        .recent_activity
+          %ul
+            - @today_activity.each do |activity|
+              %li
+                %div= activity.content.html_safe
           

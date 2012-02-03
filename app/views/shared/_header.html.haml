@@ -3,8 +3,11 @@
   #user_status
     %ul
       %li
-        %a{:href => "#"} Settings
-      %li= link_to 'Logout', destroy_member_session_path, :method => :delete
+        Logged in as 
+        = link_to current_member.full_name, user_path(current_member)
+      %li &nbsp &nbsp or
+      %li
+        = link_to 'Logout', destroy_member_session_path, :method => :delete
 #menu.menu
   %ul
     %li= link_to "Dashboard", root_path

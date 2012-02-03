@@ -101,6 +101,12 @@ h1 {
 .field_with_errors input[type='text'] {
 	border:2px solid red;
 }
+.field_with_errors input[type='password'] {
+	border:2px solid red;
+}
+.field_with_errors input[type='email'] {
+	border:2px solid red;
+}
 .field_with_errors textarea {
 	border:2px solid red;
 }
