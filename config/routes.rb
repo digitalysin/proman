@@ -1,10 +1,18 @@
 Proman::Application.routes.draw do
   devise_for :members
   root :to => "home#index"
+  
   resources :users
+  
   resources :projects do
+    resources :comments
+    
     resources :milestones do
-      resources :tasks
+      resources :comments
+      
+      resources :tasks do
+        resources :comments
+      end
     end
   end
   # The priority is based upon order of creation:

@@ -3,6 +3,7 @@ class TasksController < ApplicationController
     @project = Project.find params[:project_id]
     @milestone = Milestone.find params[:milestone_id]
     @task = Task.find params[:id]
+    @comment = Comment.new
   end
   
   def new

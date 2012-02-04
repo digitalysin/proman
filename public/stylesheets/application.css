@@ -304,6 +304,12 @@ h3 { margin:5px 0px;}
 }
 .cell_center {
 	text-align:center;
+}	
+/*comment*/
+.comment_area {
+	margin:3px;
+}
+	
 /* --- tab ---- */
 .tab {
 	clear:both;

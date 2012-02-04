@@ -24,10 +24,10 @@
   - if @yesterday_activity.present?
     %ul
       %li
-        %h3 Today
+        %h3 Yesterday
         .recent_activity
           %ul
-            - @today_activity.each do |activity|
+            - @yesterday_activity.each do |activity|
               %li
                 %div= activity.content.html_safe
           

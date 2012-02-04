@@ -10,10 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203064546) do
+ActiveRecord::Schema.define(:version => 20120204050922) do
 
   create_table "activities", :force => true do |t|
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "project_id"
+    t.integer  "milestone_id"
+    t.integer  "task_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120203064546) do
     t.boolean  "owner"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -81,5 +92,7 @@ ActiveRecord::Schema.define(:version => 20120203064546) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

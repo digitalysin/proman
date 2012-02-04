@@ -24,7 +24,7 @@
   - else
     %h3.milestone Available milestone for this project
     %ul
-      - @project.milestones.each do |milestone|
+      - @project.milestones.includes(:users).each do |milestone|
         %li
           = link_to milestone.name.humanize, project_milestone_path(@project, milestone)
           .project_status
@@ -42,3 +42,28 @@
     .milestone
       = link_to 'Append', new_project_milestone_path(@project)
       new milestone
+      
+    .comment_area
+      - unless @project.comments.present?
+        %h5 There is no comment yet
+      - else
+        %h5 Comments
+        %ul
+          - @project.comments.project_comments(@project.id).each do |comment|
+            %li
+              = comment.content.html_safe
+              .project_status
+                Created at : 
+                = comment.created_at.strftime("%d, %B %Y")
+                | by  
+                = link_to comment.user.full_name, user_path(comment.user)
+
+      - @comment = Comment.new
+      = form_for @comment, :url => project_comments_path(@project) do |f|
+        = f.hidden_field :project_id, :value => @project.id
+        = f.hidden_field :user_id, :value => current_member.id
+        %table
+          %tr
+            %td= f.text_area :content, :id => :comment_text_area, :rows => 10, :cols => 70
+          %tr
+            %td= f.submit
