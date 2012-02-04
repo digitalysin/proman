@@ -3,15 +3,15 @@ class CommentsController < ApplicationController
     @comment = Comment.new params[:comment]
     respond_to do |format|
       if @comment.save
-        format.html { respond_and_redirect("Comment succesfully created.", true) }
+        format.html { respond_and_redirect("Comment succesfully created.") }
       else
-        format.html { respond_and_redirect("Comment failed.", false) }
+        format.html { respond_and_redirect("Comment failed.") }
       end
     end
   end
   
   private
-    def respond_and_redirect(notice,success)
+    def respond_and_redirect(notice)
       task = Task.find params[:task_id] if params[:task_id].present?
       milestone = Milestone.find(params[:milestone_id]) if params[:milestone_id].present? 
       project = Project.find(params[:project_id]) if params[:project_id].present?
